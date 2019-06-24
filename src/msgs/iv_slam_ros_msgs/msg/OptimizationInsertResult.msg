@@ -1,0 +1,6 @@
+int32 trajectory_id
+float64 time
+string file_time_name
+nav_msgs/Odometry range_data_pose
+insertion_submaps insertion_result
+int32 current_range_data_index

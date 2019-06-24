@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+<!--在线离线控制执行,同时启动点云预处理节点和动态目标跟踪节点-->
+   
+   <!-- The namespace where images are published -->
+
+  <arg    name="directory" default="/home/zhanghm/Datasets/KITTI/tracking/training/"/>
+   <arg   name="rviz" default="true"/>
+
+  <node   pkg="kitti_tracking_player" type="kitti_tracking_player" name="kitti_tracking_player" 
+            required="true"
+           args= "-d $(arg directory) -s 0000 -f 2 -a 1"
+   />
+            
+  <node pkg="dynamic_object" type="fusion_detection_node" name="fusion_detection_node"  output="screen">
+  	<remap from="/kitti_player/color/left/image_rect" to="/kitti/camera_color_left/image_raw"/>
+  	<remap from="/kitti_player/hdl64e" to="/kitti/velo/pointcloud"/>
+  	<remap from="/kitti_player/oxts/imu" to="/kitti/oxts/imu"/>
+  	<remap from="/kitti_player/oxts/gps" to="/kitti/oxts/gps/fix"/>
+  </node>
+  
+<!--  
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find dynamic_object)config/fusion_detection.rviz" />
+  </group>
+-->
+</launch>

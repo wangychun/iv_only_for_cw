@@ -1,0 +1,23 @@
+#switch control variables
+is_display_all: false
+is_use_road_points_properties: false
+
+#detector parameters
+detector_params:
+  tWidthMin: 0.25
+  tWidthMax: 3.8
+  tLenMin: 0.5
+  tLenMax: 5.0
+  tNumPoints: 20
+  tHeightMin: 0.3
+  tHeightMax: 2.6
+  tHLRatioMin: 0.1
+  tHLRatioMax: 2.0
+  tAreaMax: 20.0
+
+#output conditions
+velocity_limit: 1.0
+lateral_distance_limit: 5.0
+longitudinal_distance_limit: 1.0
+
+

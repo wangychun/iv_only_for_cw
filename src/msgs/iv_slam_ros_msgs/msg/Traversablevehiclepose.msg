@@ -1,0 +1,4 @@
+std_msgs/Header header
+nav_msgs/Odometry location_module_pose
+nav_msgs/Odometry primary_submap_vehicle_pose
+bool use_location_module

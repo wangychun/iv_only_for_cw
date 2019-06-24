@@ -1,0 +1,205 @@
+cmake_minimum_required(VERSION 3.10)
+project(src)
+
+set(CMAKE_CXX_STANDARD 11)
+
+include_directories(dynamic_object/src)
+include_directories(dynamic_object/src/detect)
+include_directories(dynamic_object/src/match)
+include_directories(dynamic_object/src/motion)
+include_directories(dynamic_object/src/multisensor)
+include_directories(dynamic_object/src/sensors_fusion)
+include_directories(dynamic_object/src/tracker)
+include_directories(dynamic_object/src/utils)
+include_directories(dynamic_object_map/src)
+include_directories(dynamic_object_map/src/detect)
+include_directories(ivcommon/ivcommon/common)
+include_directories(ivcommon/ivcommon/io)
+include_directories(ivcommon/ivcommon/transform)
+include_directories(ivcommon/ivcommon/transform/utm)
+include_directories(ivrc_cross_communication/src)
+include_directories(sensor_driver/sensor_driver/src/ecu)
+include_directories(sensor_driver/sensor_driver/src/gps)
+include_directories(sensor_driver/sensor_driver/src/ins)
+include_directories(sensor_driver/sensor_driver/src/rslidar)
+include_directories(sensor_driver/sensor_driver/src/rslidar_new)
+include_directories(sensor_driver/sensor_driver/src/util)
+include_directories(sensor_driver/sensor_driver/src/util/boostudp)
+include_directories(sensor_driver/sensor_driver/src/util/playback)
+include_directories(sensor_driver/sensor_driver/src/util/utm)
+include_directories(sensor_driver/sensor_driver/src/util/xmlconf)
+include_directories(sensor_driver/sensor_driver/src/velodyne)
+
+add_executable(src
+        dynamic_object/src/detect/box_fitting.cpp
+        dynamic_object/src/detect/box_fitting.h
+        dynamic_object/src/detect/component_clustering.cpp
+        dynamic_object/src/detect/component_clustering.h
+        dynamic_object/src/detect/gaus_blur.cpp
+        dynamic_object/src/detect/gaus_blur.h
+        dynamic_object/src/detect/ground_removal.cpp
+        dynamic_object/src/detect/ground_removal.h
+        dynamic_object/src/detect/TargetDetection.cpp
+        dynamic_object/src/detect/TargetDetection.h
+        dynamic_object/src/match/MultiMatch_local.cpp
+        dynamic_object/src/match/MultiMatch_local.h
+        dynamic_object/src/match/object_matching.cpp
+        dynamic_object/src/match/object_matching.h
+        dynamic_object/src/match/TargetMatching.cpp
+        dynamic_object/src/match/TargetMatching.h
+        dynamic_object/src/motion/Motion_global.cpp
+        dynamic_object/src/motion/Motion_global.h
+        dynamic_object/src/motion/Motion_local.cpp
+        dynamic_object/src/motion/Motion_local.h
+        dynamic_object/src/motion/TargetTracking.cpp
+        dynamic_object/src/motion/TargetTracking.h
+        dynamic_object/src/motion/TrajectoryDetection.cpp
+        dynamic_object/src/motion/TrajectoryDetection.h
+        dynamic_object/src/multisensor/MultiSensor.cpp
+        dynamic_object/src/multisensor/MultiSensor.h
+        dynamic_object/src/sensors_fusion/lidar_camera_projection_utils.cpp
+        dynamic_object/src/sensors_fusion/lidar_camera_projection_utils.h
+        dynamic_object/src/tracker/kf.cpp
+        dynamic_object/src/tracker/kf.h
+        dynamic_object/src/tracker/measurement_package.h
+        dynamic_object/src/tracker/MovingTargetTrack.cpp
+        dynamic_object/src/tracker/MovingTargetTrack.h
+        dynamic_object/src/tracker/tools.h
+        dynamic_object/src/tracker/ukf.cpp
+        dynamic_object/src/tracker/ukf.h
+        dynamic_object/src/tracker/ukf_tracker.cpp
+        dynamic_object/src/tracker/ukf_tracker.h
+        dynamic_object/src/utils/cloud_transform_utils.cpp
+        dynamic_object/src/utils/cloud_transform_utils.h
+        dynamic_object/src/utils/ogm_mapping_utils.cpp
+        dynamic_object/src/utils/ogm_mapping_utils.h
+        dynamic_object/src/utils/visualizer_utils.cpp
+        dynamic_object/src/utils/visualizer_utils.h
+        dynamic_object/src/dense_point_cloud_generation.cpp
+        dynamic_object/src/dense_point_cloud_generation.h
+        dynamic_object/src/dynamic_object.cpp
+        dynamic_object/src/dynamic_object_tracker.cpp
+        dynamic_object/src/dynamicobject.cpp
+        dynamic_object/src/lidar_camera_handler_node.cpp
+        dynamic_object/src/multi_object_tracking.cpp
+        dynamic_object/src/multi_object_tracking.h
+        dynamic_object/src/point_cloud_voxelization.cpp
+        dynamic_object/src/ShowResult.cpp
+        dynamic_object/src/ShowResult.h
+        dynamic_object/src/StructMovingTargetDefine.cpp
+        dynamic_object/src/StructMovingTargetDefine.h
+        dynamic_object/src/test_node.cpp
+        dynamic_object/src/transformmain.cpp
+        dynamic_object_map/src/detect/box_fitting.cpp
+        dynamic_object_map/src/detect/box_fitting.h
+        dynamic_object_map/src/detect/component_clustering.cpp
+        dynamic_object_map/src/detect/component_clustering.h
+        dynamic_object_map/src/detect/gaus_blur.cpp
+        dynamic_object_map/src/detect/gaus_blur.h
+        dynamic_object_map/src/detect/ground_removal.cpp
+        dynamic_object_map/src/detect/ground_removal.h
+        dynamic_object_map/src/detect/MapOGM.cpp
+        dynamic_object_map/src/detect/MapOGM.h
+        dynamic_object_map/src/detect/TargetDetection.cpp
+        dynamic_object_map/src/detect/TargetDetection.h
+        dynamic_object_map/src/detect/VLaneLocalization.cpp
+        dynamic_object_map/src/detect/VLaneLocalization.h
+        dynamic_object_map/src/cloud_map_generator.cpp
+        dynamic_object_map/src/MovingTargetTrack.cpp
+        dynamic_object_map/src/MovingTargetTrack.h
+        dynamic_object_map/src/multi_object_tracking.cpp
+        dynamic_object_map/src/multi_object_tracking.h
+        dynamic_object_map/src/ShowResult.cpp
+        dynamic_object_map/src/ShowResult.h
+        dynamic_object_map/src/StructMovingTargetDefine.cpp
+        dynamic_object_map/src/StructMovingTargetDefine.h
+        ivcommon/ivcommon/common/blocking_queue.h
+        ivcommon/ivcommon/common/common.h
+        ivcommon/ivcommon/common/configuration_file_resolver.cc
+        ivcommon/ivcommon/common/configuration_file_resolver.h
+        ivcommon/ivcommon/common/fixed_ratio_sampler.cc
+        ivcommon/ivcommon/common/fixed_ratio_sampler.h
+        ivcommon/ivcommon/common/histogram.cc
+        ivcommon/ivcommon/common/histogram.h
+        ivcommon/ivcommon/common/lua.h
+        ivcommon/ivcommon/common/lua_parameter_dictionary.cc
+        ivcommon/ivcommon/common/lua_parameter_dictionary.h
+        ivcommon/ivcommon/common/make_unique.h
+        ivcommon/ivcommon/common/math.h
+        ivcommon/ivcommon/common/mutex.h
+        ivcommon/ivcommon/common/port.h
+        ivcommon/ivcommon/common/rate_timer.h
+        ivcommon/ivcommon/common/thread_pool.cc
+        ivcommon/ivcommon/common/thread_pool.h
+        ivcommon/ivcommon/common/time.cc
+        ivcommon/ivcommon/common/time.h
+        ivcommon/ivcommon/io/proto_stream.cc
+        ivcommon/ivcommon/io/proto_stream.h
+        ivcommon/ivcommon/transform/utm/datum.cc
+        ivcommon/ivcommon/transform/utm/datum.h
+        ivcommon/ivcommon/transform/utm/utm.cc
+        ivcommon/ivcommon/transform/utm/utm.h
+        ivcommon/ivcommon/transform/rigid_transform.cc
+        ivcommon/ivcommon/transform/rigid_transform.h
+        ivcommon/ivcommon/transform/transform.cc
+        ivcommon/ivcommon/transform/transform.h
+        ivcommon/scripts/eveluatetime.m
+        ivcommon/scripts/eveluation.m
+        ivcommon/scripts/gpscalibration.m
+        ivcommon/scripts/gpslidarcalibration.m
+        ivrc_cross_communication/src/math.h
+        ivrc_cross_communication/src/port.h
+        ivrc_cross_communication/src/rigid_transform.cc
+        ivrc_cross_communication/src/rigid_transform.h
+        ivrc_cross_communication/src/transform.cc
+        ivrc_cross_communication/src/transform.h
+        ivrc_cross_communication/src/traversablearea_pub_main.cpp
+        ivrc_cross_communication/src/traversablearea_sub_main.cpp
+        ivrc_cross_communication/src/traversablearea_sub_main_demo.cpp
+        sensor_driver/sensor_driver/src/ecu/AnalysisECU.cpp
+        sensor_driver/sensor_driver/src/ecu/AnalysisECU.h
+        sensor_driver/sensor_driver/src/gps/AnalysisGPS.cpp
+        sensor_driver/sensor_driver/src/gps/AnalysisGPS.h
+        sensor_driver/sensor_driver/src/ins/AnalysisINS_Octans.cpp
+        sensor_driver/sensor_driver/src/ins/AnalysisINS_Octans.h
+        sensor_driver/sensor_driver/src/ins/AnalysisINS_OxT.cpp
+        sensor_driver/sensor_driver/src/ins/AnalysisINS_OxT.h
+        sensor_driver/sensor_driver/src/ins/imu531.cpp
+        sensor_driver/sensor_driver/src/ins/imu531.h
+        sensor_driver/sensor_driver/src/rslidar/myhdl_grabber.cpp
+        sensor_driver/sensor_driver/src/rslidar/myhdl_grabber.h
+        sensor_driver/sensor_driver/src/rslidar_new/myhdl_grabber.cpp
+        sensor_driver/sensor_driver/src/rslidar_new/myhdl_grabber.h
+        sensor_driver/sensor_driver/src/util/boostudp/boostudp.cpp
+        sensor_driver/sensor_driver/src/util/boostudp/boostudp.h
+        sensor_driver/sensor_driver/src/util/playback/iv_data_playback.cpp
+        sensor_driver/sensor_driver/src/util/playback/iv_data_playback.h
+        sensor_driver/sensor_driver/src/util/utm/datum.cpp
+        sensor_driver/sensor_driver/src/util/utm/datum.h
+        sensor_driver/sensor_driver/src/util/utm/utm.cpp
+        sensor_driver/sensor_driver/src/util/utm/utm.h
+        sensor_driver/sensor_driver/src/util/xmlconf/tinyxml2.cpp
+        sensor_driver/sensor_driver/src/util/xmlconf/tinyxml2.h
+        sensor_driver/sensor_driver/src/util/xmlconf/xmlconf.cpp
+        sensor_driver/sensor_driver/src/util/xmlconf/xmlconf.h
+        sensor_driver/sensor_driver/src/util/mytime.h
+        sensor_driver/sensor_driver/src/util/ToXml.hh
+        sensor_driver/sensor_driver/src/velodyne/data_types.hpp
+        sensor_driver/sensor_driver/src/velodyne/HDL32Structure.cpp
+        sensor_driver/sensor_driver/src/velodyne/HDL32Structure.h
+        sensor_driver/sensor_driver/src/velodyne/myhdl_grabber.cpp
+        sensor_driver/sensor_driver/src/velodyne/myhdl_grabber.h
+        sensor_driver/sensor_driver/src/velodyne/mytime.h
+        sensor_driver/sensor_driver/src/velodyne/roadboundary.cpp
+        sensor_driver/sensor_driver/src/velodyne/roadboundary.h
+        sensor_driver/sensor_driver/src/getbackvelodynedata.cpp
+        sensor_driver/sensor_driver/src/getecudata.cpp
+        sensor_driver/sensor_driver/src/getgpsdata.cpp
+        sensor_driver/sensor_driver/src/getinsdata.cpp
+        sensor_driver/sensor_driver/src/getmultirslidardata.cpp
+        sensor_driver/sensor_driver/src/getmultivelodynedata.cpp
+        sensor_driver/sensor_driver/src/getrslidardata.cpp
+        sensor_driver/sensor_driver/src/getsinglerslidardata.cpp
+        sensor_driver/sensor_driver/src/getvelodynedata.cpp
+        sensor_driver/sensor_driver/src/kittidata.cpp
+        sensor_driver/sensor_driver/src/masternode.cpp)

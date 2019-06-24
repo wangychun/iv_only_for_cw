@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package  format="2">
+  <name>ivrc_cross_communication</name>
+  <version>0.0.0</version>
+
+  <description>
+	This is a ROS implementation of ivrc_slam by bit RCIV
+  </description>
+
+  <maintainer email="Zack_Liu@gmail.com">Jerry JI</maintainer>
+
+  <license>BSD</license>
+
+  <author email="Zack_Liu@gmail.com">Jerry JI</author>
+  
+   <buildtool_depend>catkin</buildtool_depend>
+   <build_depend>g++-static</build_depend>
+   <build_depend>google-mock</build_depend>
+   <build_depend>python-sphinx</build_depend>
+
+
+  <depend>roscpp</depend>
+  <depend>iv_slam_ros_msgs</depend> 
+ 
+  <depend>geometry_msgs</depend>
+  <depend>image_transport</depend>
+  <depend>cv_bridge</depend>  
+  <depend>roslib</depend>
+<depend>std_msgs</depend>
+<depend>ivcommon</depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
